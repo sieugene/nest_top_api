@@ -14,22 +14,30 @@ import { ConfigService } from '@nestjs/config';
 
 @Controller('top-page')
 export class TopPageController {
-  constructor(private readonly configService: ConfigService) {}
+  // constructor(private readonly configService: ConfigService) {}
   @Post('create')
-  async create(@Body() dto: Omit<TopPageModel, '_id'>) {}
+  async create(@Body() dto: Omit<TopPageModel, '_id'>) {
+    return;
+  }
 
   @Get('get/:alias')
   async get(@Param('alias') alias: string) {
-    this.configService.get('TEST');
+    return;
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {}
+  async delete(@Param('id') id: string) {
+    return;
+  }
 
   @Patch(':id')
-  async patch(@Param('id') id: string, @Body() dto: TopPageModel) {}
+  async patch(@Param('id') id: string, @Body() dto: TopPageModel) {
+    return;
+  }
 
   @HttpCode(200)
   @Post()
-  async find(@Body() dto: TopPageDto) {}
+  async find(@Body() dto: TopPageDto) {
+    return;
+  }
 }
