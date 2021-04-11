@@ -1,3 +1,4 @@
+import { UserEmail } from './../decorators/user-email.decorator';
 import {
   Controller,
   Post,
@@ -35,8 +36,13 @@ export class ReviewController {
     }
   }
 
+  @UseGuards(new JwtAuthGuard())
   @Get('byProduct/:productId')
-  async getByProduct(@Param('productId') productId: string) {
+  async getByProduct(
+    @Param('productId') productId: string,
+    @UserEmail() email: string,
+  ) {
+    console.log(email, '!!!!');
     return this.reviewService.findByProductId(productId);
   }
 }
