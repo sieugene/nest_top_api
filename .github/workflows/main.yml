@@ -1,19 +1,30 @@
-name: Public Docker
-
-on:
-  push:
-    branches: [master]
-   
+# name: Public Docker
+# on:
+#   push:
+#     branches: [master]
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@master
+#       - name: Public to registry
+#         uses: elgohr/Publish-Docker-Github-Action@master
+#         with:
+#           registry: docker.pkg.github.com
+#           name: docker.pkg.github.com/sieugene/nest_top_api/top-api
+#           username: ${{ secrets.DOCKER_USERNAME }}
+#           password: ${{ secrets.DOCKER_PASSWORD }}
+#           tags: "develop"
+name: Publish Docker
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Public to registry
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          registry: docker.pkg.github.com
-          name: docker.pkg.github.com/sieugene/nest_top_api/top-api
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "develop"
+    - uses: actions/checkout@master
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: top-api/https://github.com/sieugene/nest_top_api
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
