@@ -10,8 +10,7 @@ jobs:
       - name: Public to registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          registry: docker.pkg.github.com
           name: docker.pkg.github.com/sieugene/nest_top_api/top-api
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "develop"
+          registry: docker.pkg.github.com
