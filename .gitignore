@@ -35,3 +35,4 @@ lerna-debug.log*
 
 /mongo-data-4.4
 .clinic
+/uploads
