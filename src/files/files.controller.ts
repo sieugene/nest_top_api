@@ -1,3 +1,4 @@
+import { MFile } from './mfile.class';
 import { FilesService } from './files.service';
 import { JwtAuthGuard } from './../auth/guards/jwt.guard';
 import {
@@ -18,9 +19,19 @@ export class FilesController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
-  uploadFile(
+  async uploadFile(
     @UploadedFile() file: Express.Multer.File,
   ): Promise<FileElementResponse[]> {
-    return this.fileService.saveFiles([file]);
+    const saveArray: MFile[] = [new MFile(file)];
+    if (file.mimetype.includes('image')) {
+      const webP = await this.fileService.convertToWebP(file.buffer);
+      saveArray.push(
+        new MFile({
+          originalname: `${file.originalname.split('.')[0]}.webp`,
+          buffer: webP,
+        }),
+      );
+    }
+    return this.fileService.saveFiles(saveArray);
   }
 }
